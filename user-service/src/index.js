@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const { config } = require('./config');
 const logger = require('./config/logger');
+const authRoutes = require('./routes/auth.route');
 
 
 const { corsMiddleware } = require('./middlewares/cors.middleware');
@@ -15,6 +16,7 @@ app.use(corsMiddleware);
 app.use(reqLogger);
 app.use(cookieParser());
 app.use(express.json());
+app.use("/api/v1/auth", authRoutes);
 
 
 app.get("/", (req, res) => {

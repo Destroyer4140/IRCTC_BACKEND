@@ -6,6 +6,7 @@ const connectionString = config.DATABASE_URL;
 const globalForPrisma = global;
 
 if (!globalForPrisma.prisma) {
+  console.log("connectionString", connectionString);
   const adapter = new PrismaPg({ connectionString });
 
   globalForPrisma.prisma = new PrismaClient({

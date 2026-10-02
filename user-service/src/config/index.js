@@ -1,3 +1,4 @@
+require('dotenv').config();
 const config = {
   SERVICE_NAME: require('../../package.json').name,
   PORT: Number(process.env.PORT) || 4001,
@@ -10,7 +11,7 @@ const config = {
   ALLOWED_ORIGINS: process.env.ALLOWED_ORIGINS,
 
   OTP_TTL: process.env.OTP_TTL || 300,
-  OTP_RATE_MAX_PER_HOUR: process.env.OTP_RATE_MAX_PER_HOUR || 5,
+  OTP_RATE_MAX_PER_HOUR: process.env.OTP_RATE_MAX_PER_HOUR || 52,
   OTP_MAX_VERIFY_ATTEMPTS: process.env.OTP_MAX_VERIFY_ATTEMPTS || 5,
   OTP_HMAC_SECRET: process.env.OTP_HMAC_SECRET || "09dc0abbb2961391d822610b31b912e3231d4d2745c76b1ef4765af4c62f6079",
 
@@ -23,8 +24,8 @@ const config = {
   REDIS_USER_TTL: Number(process.env.REDIS_USER_TTL || 86400),
 
 
-  // MAIL_SEND: process.env.MAIL_SEND,
-  // SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
+  MAIL_SEND: process.env.MAIL_SEND,
+  SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
 
   // GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   // GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
@@ -37,11 +38,11 @@ const config = {
 //   throw new Error("GOOGLE_CLIENT_ID environment variable is required");
 // }
 
-// if (!config.SENDGRID_API_KEY) {
-//   throw new Error('SENDGRID_API_KEY missing');
-// }
+if (!config.SENDGRID_API_KEY) {
+  throw new Error('SENDGRID_API_KEY missing');
+}
 
-// if (!config.MAIL_SEND) {
-//   throw new Error('MAIL_SEND missing');
-// }
+if (!config.MAIL_SEND) {
+  throw new Error('MAIL_SEND missing');
+}
 module.exports = { config };
